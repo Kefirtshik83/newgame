@@ -7,10 +7,11 @@ class Game
 {
 private:
 	Field field;
-	Bowl bowls[9];
+	Bowl bowls[1];
 public:
 	Game();
 	void draw_field(sf::RenderWindow& window) const;
 	Field get_field() const ;
 	void game_draw(sf::RenderWindow& window);
+	void tick();
 };
