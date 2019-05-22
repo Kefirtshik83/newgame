@@ -15,11 +15,11 @@ public:
 	sf::RectangleShape get_field_shape() const;
 	sf::RectangleShape get_score_field_shape() const;
 	void draw_field(sf::RenderWindow& window) const;
-	static int d;
-	static int w;
-	static int h;
-	static int score_field;
-	static int hole;
+	const static int d;
+	const static int w;
+	const static int h;
+	const static int score_field;
+	const static int hole;
 	//int score = 0;
 private:
 	sf::RectangleShape field_shape;

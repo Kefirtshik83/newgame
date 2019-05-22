@@ -1,9 +1,9 @@
 #include "Field.h"
-int Field::d = 20;
-int Field::w = 1200;
-int Field::h = 720;
-int Field::score_field = 40;
-int Field::hole = 240;
+const int Field::d = 20;
+const int Field::w = 1200;
+const int Field::h = 720;
+const int Field::score_field = 40;
+const int Field::hole = 240;
 Field::Field()
 {
 	field_shape.setSize(sf::Vector2f(w, h));

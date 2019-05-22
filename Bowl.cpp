@@ -1,14 +1,19 @@
 #include"Bowl.h"
-Bowl::Bowl(sf::Vector2f pos,  sf::Vector2f speed, int radius): radius(radius), speed(speed)
+const int Bowl:: radius = 10;
+Bowl::Bowl(sf::Vector2f pos,  sf::Vector2f speed, int radius): speed(speed)
 {
 	bowl_shape.setRadius(radius);
+
 	bowl_shape.setFillColor(sf::Color::Blue);
+
 	bowl_shape.setPosition(pos);
+
 }
-Bowl :: Bowl():radius(50)
+Bowl :: Bowl()
 {
-	double x((double)(Field::d + (double)2 * radius + rand() % (Field::w - 6 * radius + 1)));
-	double y((double)(Field::score_field + Field::d + (double)2 * radius + rand() % (Field::h - 6 * radius + 1)));
+	double x((double)(Field::d + (double)2 * radius + rand()% (Field::w - 4 * radius + 1)));
+	double y((double)(Field::score_field + Field::d + (double)2 * radius + rand()% (Field::h - 4 * radius + 1)));
+	bowl_shape.setOrigin(radius, radius);
 	speed = sf::Vector2f(rand() % 100*pow(-1, rand()%2), rand() % 100*pow(-1, rand()%2));
 	bowl_shape.setRadius(radius);
 	bowl_shape.setFillColor(sf::Color::Blue);
@@ -22,3 +27,7 @@ void Bowl::set_speed(sf::Vector2f sp){speed = sp;}
 void Bowl::move(sf::Vector2f delta){bowl_shape.move(delta);}
 int Bowl::get_size() const { return radius; }
 void Bowl::draw_bowl(sf::RenderWindow& window) const{window.draw(bowl_shape);}
+double Bowl::abs_speed() const
+{
+	return sqrt(speed.x * speed.x + speed.y * speed.y);
+}
