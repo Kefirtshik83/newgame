@@ -20,15 +20,13 @@ public:
 	const static int h;
 	const static int score_field;
 	const static int hole;
+	sf::Vector2f get_position(int i) const;
 	//int score = 0;
 private:
 	sf::RectangleShape field_shape;
 	sf::RectangleShape score_field_shape;
 	sf::RectangleShape hole1_shape;
 	sf::RectangleShape hole2_shape;
-	sf::CircleShape circle1;
-	sf::CircleShape circle2;
-	sf::CircleShape circle3;
-	sf::CircleShape circle4;
+	sf::CircleShape circles[4];
 };
 

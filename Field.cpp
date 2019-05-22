@@ -19,18 +19,17 @@ Field::Field()
 	hole2_shape.setSize(sf::Vector2f(d, hole));
 	hole2_shape.setFillColor(sf::Color::Black);
 	hole2_shape.setPosition(sf::Vector2f(d+w, h / 3 + d+score_field));
-	circle1.setRadius(d / 2);
-	circle2.setRadius(d / 2);
-	circle3.setRadius(d / 2);
-	circle4.setRadius(d / 2);
-	circle1.setFillColor(sf::Color(250, 150, 100));
-	circle2.setFillColor(sf::Color(250, 150, 100));
-	circle3.setFillColor(sf::Color(250, 150, 100));
-	circle4.setFillColor(sf::Color(250, 150, 100));
-	circle1.setPosition(sf::Vector2f(0, h / 3 + d/2 + score_field));
-	circle2.setPosition(sf::Vector2f(0 , 2*h / 3 + d/2 + score_field));
-	circle3.setPosition(sf::Vector2f(d + w, h / 3 + d/2 + score_field));
-	circle4.setPosition(sf::Vector2f(d+w, 2*h / 3 + d/2 + score_field));
+	for (int i = 0; i < 4; ++i)
+	{
+		circles[i].setRadius(d / 2);
+		circles[i].setFillColor(sf::Color(250, 150, 100));
+		circles[i].setOrigin(circles[i].getRadius(), circles[i].getRadius());
+	}
+
+	circles[0].setPosition(sf::Vector2f(d/2,d +  h / 3  + score_field));
+	circles[1].setPosition(sf::Vector2f(d/2 , 2*h / 3 + d  + score_field));
+	circles[2].setPosition(sf::Vector2f(d + d/2 + w, h / 3 + d  + score_field));
+	circles[3].setPosition(sf::Vector2f(d + d/2 + w, 2 * h/3+ d + score_field));
 }
 
 int Field::get_d() const{return d;}
@@ -41,14 +40,15 @@ int Field::get_h() const{return h;}
 int Field::get_hole() const { return hole; }
 sf::RectangleShape Field::get_field_shape() const { return field_shape; }
 sf::RectangleShape Field:: get_score_field_shape() const { return score_field_shape; }
+sf::Vector2f Field:: get_position(int i) const { return circles[i].getPosition(); }
 void Field::draw_field(sf::RenderWindow& window) const
 {
 	window.draw(field_shape);
 	window.draw(score_field_shape);
 	window.draw(hole1_shape);
 	window.draw(hole2_shape);
-	window.draw(circle1);
-	window.draw(circle2);
-	window.draw(circle3);
-	window.draw(circle4);
+	for (int i = 0; i < 4; ++i)
+	{
+		window.draw(circles[i]);
+	}
 }

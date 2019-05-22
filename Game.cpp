@@ -11,6 +11,7 @@ Field Game::get_field() const { return field; }
 
 void Game::tick()
 {
+	//соударения со стенами
 	for (int i = 0; i < n; ++i)
 	{
 		if ((bowls[i].get_position().x - Bowl::radius < Field::d || bowls[i].get_position().x + Bowl::radius > Field::d + Field::w) && !(bowls[i].get_position().y > (Field::h - Field::h/3)/2+ Field::d + Field::score_field && bowls[i].get_position().y < (Field::h - Field::h / 3) / 2 + Field::d + Field::score_field + Field::h/3))
@@ -56,6 +57,19 @@ void Game::tick()
 
 		}
 	}
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (dist(field.get_position(j), bowls[i].get_position()) < 2 * Bowl::radius)
+			{
+				sf::Vector2f norm = normal(sf::Vector2f(field.get_position(j).x - bowls[i].get_position().x, field.get_position(j).y - bowls[i].get_position().y));
+				sf::Vector2f v_norm = proection_b_on_a(norm, bowls[i].get_speed());
+				sf::Vector2f v_prod = bowls[i].get_speed() - v_norm;
+				bowls[i].set_speed(bowls[i].get_speed() - (float)2 * v_prod);
+			}
+		}
+	}
 	
 	
 }
@@ -80,6 +94,7 @@ void Game::game_draw(sf::RenderWindow& window)
 		get_field().draw_field(window);
 		//bowls[1].draw_bowl(window);
 		const float dt = clock.restart().asSeconds();
+		std::cout << dt << std::endl;
 		for (int i = 0; i < n; ++i)
 		{
 			
