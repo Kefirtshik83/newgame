@@ -17,8 +17,9 @@ private:
 	int n = 25;
 public:
 	Game();
-	sf::Vector2f player_collision(sf::Vector2f pos1, sf::Vector2f v1, sf::Vector2f pos2, sf::Vector2f v2);
-	sf::Vector2f wall_bowls_collision(sf::Vector2f pos1, sf::Vector2f v1, sf::Vector2f pos2, sf::Vector2f v2);
+	void player1_collision(Player1 pl1, Bowl& bowl);
+	void player2_collision(Player2 pl2, Bowl& bowl);
+	void wall_bowls_collision(sf::CircleShape circle,Bowl& bowl );
 	void wall_collision(Bowl& b);
 	void bowls_collision(Bowl & b1, Bowl& b2);
 	sf::Vector2f players_collision(sf::Vector2f v);

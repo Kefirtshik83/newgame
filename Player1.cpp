@@ -1,6 +1,7 @@
 #include "Player1.h"
 float Player1::get_radius() const { return player_shape.getRadius(); }
 float Player1::get_y() const { return player_shape.getPosition().y; }
+sf::Vector2f Player1:: get_position() const { return player_shape.getPosition(); }
 void Player1::y_up(float x) { player_shape.setPosition(sf::Vector2f(player_shape.getPosition().x, player_shape.getPosition().y + x)); }
 void Player1::control()
 {

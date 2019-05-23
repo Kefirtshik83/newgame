@@ -41,6 +41,7 @@ int Field::get_hole() const { return hole; }
 sf::RectangleShape Field::get_field_shape() const { return field_shape; }
 sf::RectangleShape Field:: get_score_field_shape() const { return score_field_shape; }
 sf::Vector2f Field:: get_position(int i) const { return circles[i].getPosition(); }
+sf::CircleShape Field::get_circle(int i) const { return circles[i]; }
 void Field::draw_field(sf::RenderWindow& window) const
 {
 	window.draw(field_shape);

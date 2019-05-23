@@ -60,6 +60,36 @@ void Game::wall_collision(Bowl& b)
 		b.set_position(sf::Vector2f(-50, Field::score_field+Field::d+Field::h/2));
 	}
 }
+void Game::wall_bowls_collision(sf::CircleShape circle, Bowl& bowl)
+{
+	sf::Vector2f norm = normal(sf::Vector2f(circle.getPosition().x - bowl.get_position().x, circle.getPosition().y - bowl.get_position().y));
+	sf::Vector2f v_norm = proection_b_on_a(norm, bowl.get_speed());
+	sf::Vector2f v_prod = bowl.get_speed() - v_norm;
+	bowl.set_speed(bowl.get_speed() - (float)2 * v_prod);
+	if (dist(circle.getPosition(), bowl.get_position()) < 2 * b_radius - 1)
+	{
+		//sf::Vector2f middle = (circle.getPosition() + bowl.get_position()) * 0.5f;
+		bowl.set_position(circle.getPosition() + (bowl.get_position() - circle.getPosition()) *(float)(b_radius * 2 / (abs(bowl.get_position() - circle.getPosition()))));
+		//std::cout << dist(ci.get_position(), b2.get_position()) << std::endl;
+	}
+}
+void Game::player1_collision(Player1 pl1, Bowl& bowl)
+{
+	if (dist(pl1.get_position(), bowl.get_position()) < b_radius + pl1.get_radius())
+	{
+		sf::Vector2f norm = normal(sf::Vector2f(pl1.get_position().x - bowl.get_position().x, pl1.get_position().y - bowl.get_position().y));
+		sf::Vector2f v_norm = proection_b_on_a(norm, bowl.get_speed());
+		sf::Vector2f v_prod = bowl.get_speed() - v_norm;
+		bowl.set_speed(bowl.get_speed() - (float)2 * v_prod);
+		if (dist(pl1.get_position(), bowl.get_position()) < b_radius + pl1.get_radius() - 1)
+		{
+			//sf::Vector2f middle = (pl1.get_position() + bowl.get_position()) * 0.5f;
+			bowl.set_position(pl1.get_position() + (bowl.get_position() - pl1.get_position()) * (float)((b_radius+ pl1.get_radius())  / (abs(bowl.get_position() - pl1.get_position()))));
+			//std::cout << dist(ci.get_position(), b2.get_position()) << std::endl;
+		}
+	}
+}
+//sf::Vector2f Game:: player2_collision(Player2 pl2, Bowl& bowl);
 
 
 void Game::tick()
@@ -78,7 +108,6 @@ void Game::tick()
 				bowls_collision(bowls[i], bowls[j]);
 			}
 
-
 		}
 	}
 	for (int i = 0; i < n; ++i)
@@ -87,14 +116,15 @@ void Game::tick()
 		{
 			if (dist(field.get_position(j), bowls[i].get_position()) < 2 * b_radius)
 			{
-				sf::Vector2f norm = normal(sf::Vector2f(field.get_position(j).x - bowls[i].get_position().x, field.get_position(j).y - bowls[i].get_position().y));
-				sf::Vector2f v_norm = proection_b_on_a(norm, bowls[i].get_speed());
-				sf::Vector2f v_prod = bowls[i].get_speed() - v_norm;
-				bowls[i].set_speed(bowls[i].get_speed() - (float)2 * v_prod);
+				wall_bowls_collision(field.get_circle(j), bowls[i]);
 			}
 		}
 	}
-	
+	for (int i = 0; i < n; ++i)
+	{
+		player1_collision(pl1, bowls[i]);
+		player1_collision(pl2, bowls[i]);
+	}
 	
 }
 

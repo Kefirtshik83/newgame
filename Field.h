@@ -21,6 +21,7 @@ public:
 	const static int score_field;
 	const static int hole;
 	sf::Vector2f get_position(int i) const;
+	sf::CircleShape get_circle(int i) const;
 	//int score = 0;
 private:
 	sf::RectangleShape field_shape;

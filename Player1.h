@@ -10,6 +10,7 @@ protected:
 public:
 	float get_radius() const;
 	float get_y() const;
+	sf::Vector2f get_position() const;
 	void y_up(float x);
 	virtual void control();
 	void set_y(float y);
