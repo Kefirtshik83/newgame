@@ -9,8 +9,6 @@ private:
 
 	sf::Vector2f speed;
 	sf::CircleShape bowl_shape;
-	sf::Image image_s;
-	sf::Texture texture_s;
 	int radius;
 public:
 	//const static int radius;
@@ -19,8 +17,10 @@ public:
 	int get_size() const;
 	sf::Vector2f get_position() const;
 	sf::Vector2f get_speed() const;
-	double abs_speed() const;
+	float abs_speed() const;
 	float get_radius() const;
+	void set_radius(float x);
+	void set_color(int r, int g, int b);
 	void set_speed(sf::Vector2f sp);
 	void set_position(sf::Vector2f pos);
 	void move(sf::Vector2f delta);
