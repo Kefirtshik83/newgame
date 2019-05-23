@@ -1,15 +1,19 @@
 #pragma once
 #include "Field.h"
+
 class Player1
 {
 protected:
-	float len;
-	sf::RectangleShape player_shape;
-	Player1();
-	virtual void control();
+	sf::CircleShape player_shape;
+
+
 public:
-	float get_len() const;
+	float get_radius() const;
 	float get_y() const;
-	int get_d() const;
-	void y_up(int x);
+	void y_up(float x);
+	virtual void control();
+	void set_y(float y);
+	void set_start_position(int x);
+	void draw_player(sf::RenderWindow& window) const;
+	Player1(int x);
 };
