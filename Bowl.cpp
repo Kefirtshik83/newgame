@@ -10,7 +10,7 @@ Bowl::Bowl(sf::Vector2f pos,  sf::Vector2f speed, int radius): speed(speed)
 }
 Bowl :: Bowl()
 {
-	radius =10;
+	radius =15;
 	float x((Field::d + 2 * radius + rand()% (Field::w - 4 * radius + 1)));
 	float y((Field::score_field + Field::d + 2 * radius + rand()% (Field::h - 4 * radius + 1)));
 	bowl_shape.setOrigin(radius, radius);

@@ -11,6 +11,8 @@ void Player1::control()
 void Player1::set_y(float y) { player_shape.setPosition(sf::Vector2f(Field::d / 2, y)); }
 void Player1:: set_start_position(int x) { player_shape.setPosition(sf::Vector2f(Field::d / 2 + (x-1)*(Field::w+ Field::d), Field::score_field + Field::d + Field::h / 2)); }
 void Player1:: draw_player(sf::RenderWindow& window) const { window.draw(player_shape); }
+int Player1:: get_score() const { return score; }
+void Player1::score_up() { score++; }
 Player1::Player1(int x)
 {
 	player_shape.setRadius(40);
